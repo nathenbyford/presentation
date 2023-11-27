@@ -1,0 +1,49 @@
+---
+title: "Adversarial Machine Learning"
+author: "Nathen Byford"
+format: 
+  baylor_theme-revealjs:
+    scrollable: false
+    footer: "Nathen Byford"
+---
+
+## Motivation
+
+- Machine learning (ML) algorithms are being used to automate many processes in all industries.
+    + Modern ML algorithms perform extremely well on standard data similar to what it was trained on, but
+    + Tend to inflate error when given data that is not standard.
+- There are two motivating exampled explored in the paper:
+    + Case 1: Attacks on spam detection algorithms, and
+    + Case 2: Attacks on vision algorithms.
+
+## Case 1: Spam detection algorithms
+- Spam detection algorithms have used ML methods for some time now to classify spam or not.
+- Good-Words-Insertion attacks are used to deceive spam filters.
+
+:::def
+table: Accuracy of algorithms on clean and attacked data
+
+| Algorithm   | Unaffected    | Affected    |
+|-------------|--------------:|------------:|
+| Naive Bayes | 0.882(0.004)  | 0.754(0.027)|
+| Logistic Regression | 0.932(0.004) | 0.673(0.005)|
+| Neural Network | 0.904(0.029) | 0.607(0.009)|
+| Random Forest| 0.912(0.005) | 0.731(0.008)|
+:::
+
+## Case 2: Computer vision algorithms 
+- Computer vision models are susceptible to attacks of the images.
+    + These alterations go unnoticed to the human eye, but causes models to misclassify the image.
+- Using a simple CNN the authors are able to obtain 99% accuracy on the MNIST dataset,
+    + This reduces to 59% when the input is attacked using the *fast gradient sign method* (FGSM)
+    
+::: {.center}
+![](computer_vision_attack.PNG)
+:::
+
+## Adversarial Machine Learning
+
+
+
+## Results
+
