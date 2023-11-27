@@ -41,9 +41,43 @@ table: Accuracy of algorithms on clean and attacked data
 ![](computer_vision_attack.PNG)
 :::
 
-## Adversarial Machine Learning
+# Methods
+
+## Adversarial Machine Learning (AML)
+
+Most work in AML has been in two areas:
+
+- New attacks to learning systems to showcase vulnerabilities,
+    + Try to fool the model with contaminated inputs
+    + Traditionally targeted computer vision systems
+- Proposing defenses to protect algorithms
+    + Those that promote protection during training
+    + Those that protect during operations
+    
+. . .
+
+:::{.subtext}
+Main focus is looking at defenses to protect against common attacks.
+:::
+
+## Protections during training
+
+- Adversarial Training
+- Bayesian Neural Networks (BNN)
+- Adversarial Reinforcement learning
+    + Q-learning (deep Q-learning)
+        * minmax-Q learning
+        * Nash-Q learning
+        * friend-or-foe-Q learning
+
+## Purposed Bayesian approach
 
 
+# Case studies
+
+## Spam detection
+
+## Coomputer vision
 
 ## Results
 
