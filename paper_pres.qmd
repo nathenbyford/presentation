@@ -7,18 +7,25 @@ format:
     footer: "Nathen Byford"
 ---
 
+## Table of contents
+1. Motivation
+2. Methods
+3. Case studies
+4. Conclusion
+5. References
+
 ## Motivation
 
-- Machine learning (ML) algorithms are being used to automate many processes in all industries.
+- Machine learning (ML) algorithms are often used to automate many processes in all industries.
     + Modern ML algorithms perform extremely well on standard data similar to what it was trained on, but
     + Tend to inflate error when given data that is not standard.
 - There are two motivating exampled explored in the paper:
     + Case 1: Attacks on spam detection algorithms, and
-    + Case 2: Attacks on vision algorithms.
+    + Case 2: Attacks on computer vision algorithms.
 
 ## Case 1: Spam detection algorithms
 - Spam detection algorithms have used ML methods for some time now to classify spam or not.
-- Good-Words-Insertion attacks are used to deceive spam filters.
+- Good-Words-Insertion-attacks are used to deceive spam filters.
 
 :::def
 table: Accuracy of algorithms on clean and attacked data
@@ -34,11 +41,11 @@ table: Accuracy of algorithms on clean and attacked data
 ## Case 2: Computer vision algorithms 
 - Computer vision models are susceptible to attacks of the images.
     + These alterations go unnoticed to the human eye, but causes models to misclassify the image.
-- Using a simple CNN the authors are able to obtain 99% accuracy on the MNIST dataset,
+- Using a simple CNN the authors are able to obtain 99% accuracy on the MNIST data set,
     + This reduces to 59% when the input is attacked using the *fast gradient sign method* (FGSM)
     
 ::: {.center}
-![](computer_vision_attack.PNG)
+![](computer_vision_attack.jpg){width=50%}
 :::
 
 # Methods
@@ -60,7 +67,7 @@ Most work in AML has been in two areas:
 Main focus is looking at defenses to protect against common attacks.
 :::
 
-## Protections during training
+## Current AML models
 
 - Adversarial Training
 - Bayesian Neural Networks (BNN)
@@ -72,12 +79,78 @@ Main focus is looking at defenses to protect against common attacks.
 
 ## Purposed Bayesian approach
 
+The Bayesian approach purposed utilizes Bayesian learning instead of game-theoretic approaches. 
+
+- Model adversary's behavior as a probability distribution
+- Update the probability distribution based on observed actions
+
+Without getting into the math, there are four steps to the approach,
+
+:::def
+1. Initialize the model
+2. Observe attacks
+3. Update the model
+4. Repeat
+:::
+
+
+:::{.subsubtext}
+This is a way of thinking and not a specific model. 
+:::
 
 # Case studies
 
 ## Spam detection
 
-## Coomputer vision
+- Problem introduced previously, good-words-insertion-attack
+- 4 models: Naive Bayes, Logistic regression, Neural Network, Random Forest.
+- Each model was trained with 
+    + No protection 
+    + Pre-training protection (common knowledge)
+    + Adversarial risk analysis (Bayesian approach)
 
-## Results
+---
 
+:::{.tab}
+table: Average accuracy of 4 classifiers
+
+| Classifier |    No protection | Common Knowledge | ARA op. | ARA tr. |
+|:-----------|-----------------:|-----------------:|--------:|--------:|
+| Naive Bayes| 0.793            | 0.867            |  0.939  | -       |
+| Logistic Reg. | 0.687         | 0.803            |  0.898  | 0.946   |
+| Neural Network | 0.774        | 0.767            |  0.882  | 0.960   |
+| Random Forest | 0.682         | 0.819            |  0.807  | -       |
+:::
+
+- The Bayesian approach has the best accuracy for almost all models.
+- For logistic regression and neural networks it is possible to utilize a prior distribution and include ARA in the training phase.
+
+## Computer vision
+- Computer vision adversarial example on 
+    + Fashion-MNIST
+    + Kuzushiji-MNIST
+- ARA robustification at operation becomes computational intractable.
+    + Robustification will take place during training
+- 3 deep neural networks: stochastic gradient decent (SGD) (no defense), adversarial training (AT defense), and the Bayesian method (ARA defense).
+
+---
+
+::::{.columns}
+:::{.column width=10%}
+:::
+:::{.column width=80%}
+![](computer_vision_results.jpg)
+:::
+::::
+
+- Overall the ARA defense is better than the AT and no defense methods when the data is attacked.
+- With clean data the defenseless and AT defense model perform better.
+
+## Conclusion
+
+- We have seen that there are areas where ML methods are implemented, but there are adversaries that seek to harm and manipulate the data in such ways to circumvent these algorithms.
+- Here we see that there are possible approaches to utilize Bayesian learning and adversarial machine learning to improve detection of effected data in these areas.
+
+## References {.smaller}
+
+David Rios Insua, Roi Naveiro, Víctor Gallego & Jason Poulos (2023) Adversarial Machine Learning: Bayesian Perspectives, Journal of the American Statistical Association, 118:543, 2195-2206, DOI: 10.1080/01621459.2023.2183129
