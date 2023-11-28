@@ -336,10 +336,20 @@ Nathen Byford
 </div>
 
 </section>
+<section id="table-of-contents" class="slide level2">
+<h2>Table of contents</h2>
+<ol type="1">
+<li>Motivation</li>
+<li>Methods</li>
+<li>Case studies</li>
+<li>Conclusion</li>
+<li>References</li>
+</ol>
+</section>
 <section id="motivation" class="slide level2">
 <h2>Motivation</h2>
 <ul>
-<li>Machine learning (ML) algorithms are being used to automate many processes in all industries.
+<li>Machine learning (ML) algorithms are often used to automate many processes in all industries.
 <ul>
 <li>Modern ML algorithms perform extremely well on standard data similar to what it was trained on, but</li>
 <li>Tend to inflate error when given data that is not standard.</li>
@@ -347,7 +357,7 @@ Nathen Byford
 <li>There are two motivating exampled explored in the paper:
 <ul>
 <li>Case 1: Attacks on spam detection algorithms, and</li>
-<li>Case 2: Attacks on vision algorithms.</li>
+<li>Case 2: Attacks on computer vision algorithms.</li>
 </ul></li>
 </ul>
 </section>
@@ -355,7 +365,7 @@ Nathen Byford
 <h2>Case 1: Spam detection algorithms</h2>
 <ul>
 <li>Spam detection algorithms have used ML methods for some time now to classify spam or not.</li>
-<li>Good-Words-Insertion attacks are used to deceive spam filters.</li>
+<li>Good-Words-Insertion-attacks are used to deceive spam filters.</li>
 </ul>
 <div class="def">
 <table>
@@ -399,13 +409,13 @@ Nathen Byford
 <ul>
 <li>These alterations go unnoticed to the human eye, but causes models to misclassify the image.</li>
 </ul></li>
-<li>Using a simple CNN the authors are able to obtain 99% accuracy on the MNIST dataset,
+<li>Using a simple CNN the authors are able to obtain 99% accuracy on the MNIST data set,
 <ul>
 <li>This reduces to 59% when the input is attacked using the <em>fast gradient sign method</em> (FGSM)</li>
 </ul></li>
 </ul>
 <div class="center">
-<p><img data-src="computer_vision_attack.PNG"></p>
+<p><img data-src="computer_vision_attack.jpg" style="width:50.0%"></p>
 </div>
 </section>
 <section>
@@ -434,8 +444,8 @@ Nathen Byford
 </div>
 </div>
 </section>
-<section id="protections-during-training" class="slide level2">
-<h2>Protections during training</h2>
+<section id="current-aml-models" class="slide level2">
+<h2>Current AML models</h2>
 <ul>
 <li>Adversarial Training</li>
 <li>Bayesian Neural Networks (BNN)</li>
@@ -452,6 +462,23 @@ Nathen Byford
 </section>
 <section id="purposed-bayesian-approach" class="slide level2">
 <h2>Purposed Bayesian approach</h2>
+<p>The Bayesian approach purposed utilizes Bayesian learning instead of game-theoretic approaches.</p>
+<ul>
+<li>Model adversary’s behavior as a probability distribution</li>
+<li>Update the probability distribution based on observed actions</li>
+</ul>
+<p>Without getting into the math, there are four steps to the approach,</p>
+<div class="def">
+<ol type="1">
+<li>Initialize the model</li>
+<li>Observe attacks</li>
+<li>Update the model</li>
+<li>Repeat</li>
+</ol>
+</div>
+<div class="subsubtext">
+<p>This is a way of thinking and not a specific model.</p>
+</div>
 </section></section>
 <section>
 <section id="case-studies" class="title-slide slide level1 center">
@@ -460,12 +487,107 @@ Nathen Byford
 </section>
 <section id="spam-detection" class="slide level2">
 <h2>Spam detection</h2>
+<ul>
+<li>Problem introduced previously, good-words-insertion-attack</li>
+<li>4 models: Naive Bayes, Logistic regression, Neural Network, Random Forest.</li>
+<li>Each model was trained with
+<ul>
+<li>No protection</li>
+<li>Pre-training protection (common knowledge)</li>
+<li>Adversarial risk analysis (Bayesian approach)</li>
+</ul></li>
+</ul>
 </section>
-<section id="coomputer-vision" class="slide level2">
-<h2>Coomputer vision</h2>
+<section class="slide level2">
+
+<div class="tab">
+<table>
+<caption>Average accuracy of 4 classifiers</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Classifier</th>
+<th style="text-align: right;">No protection</th>
+<th style="text-align: right;">Common Knowledge</th>
+<th style="text-align: right;">ARA op.</th>
+<th style="text-align: right;">ARA tr.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Naive Bayes</td>
+<td style="text-align: right;">0.793</td>
+<td style="text-align: right;">0.867</td>
+<td style="text-align: right;">0.939</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Logistic Reg.</td>
+<td style="text-align: right;">0.687</td>
+<td style="text-align: right;">0.803</td>
+<td style="text-align: right;">0.898</td>
+<td style="text-align: right;">0.946</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Neural Network</td>
+<td style="text-align: right;">0.774</td>
+<td style="text-align: right;">0.767</td>
+<td style="text-align: right;">0.882</td>
+<td style="text-align: right;">0.960</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Random Forest</td>
+<td style="text-align: right;">0.682</td>
+<td style="text-align: right;">0.819</td>
+<td style="text-align: right;">0.807</td>
+<td style="text-align: right;">-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>The Bayesian approach has the best accuracy for almost all models.</li>
+<li>For logistic regression and neural networks it is possible to utilize a prior distribution and include ARA in the training phase.</li>
+</ul>
 </section>
-<section id="results" class="slide level2">
-<h2>Results</h2>
+<section id="computer-vision" class="slide level2">
+<h2>Computer vision</h2>
+<ul>
+<li>Computer vision adversarial example on
+<ul>
+<li>Fashion-MNIST</li>
+<li>Kuzushiji-MNIST</li>
+</ul></li>
+<li>ARA robustification at operation becomes computational intractable.
+<ul>
+<li>Robustification will take place during training</li>
+</ul></li>
+<li>3 deep neural networks: stochastic gradient decent (SGD) (no defense), adversarial training (AT defense), and the Bayesian method (ARA defense).</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:10%;">
+
+</div><div class="column" style="width:80%;">
+<p><img data-src="computer_vision_results.jpg"></p>
+</div>
+</div>
+<ul>
+<li>Overall the ARA defense is better than the AT and no defense methods when the data is attacked.</li>
+<li>With clean data the defenseless and AT defense model perform better.</li>
+</ul>
+</section>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<ul>
+<li>We have seen that there are areas where ML methods are implemented, but there are adversaries that seek to harm and manipulate the data in such ways to circumvent these algorithms.</li>
+<li>Here we see that there are possible approaches to utilize Bayesian learning and adversarial machine learning to improve detection of effected data in these areas.</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller">
+<h2>References</h2>
+<p>David Rios Insua, Roi Naveiro, Víctor Gallego &amp; Jason Poulos (2023) Adversarial Machine Learning: Bayesian Perspectives, Journal of the American Statistical Association, 118:543, 2195-2206, DOI: 10.1080/01621459.2023.2183129</p>
 
 <img src="_extensions/nathenbyford/baylor_theme/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p>Nathen Byford</p>
